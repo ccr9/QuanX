@@ -1,0 +1,19 @@
+hostname = h5.ele.me, m.ctrip.com, daojia.jd.com, draw.jdfcloud.com, api-hdcj.9w9.com
+# > 大雄脚本组，签到获取cookie
+
+# 饿了么 (By @syzzzf)
+^https:\/\/h5\.ele\.me\/restapi\/eus\/v\d\/current_user$ url script-request-header nzw9314/Task/elemGetCookies.js
+
+# 携程旅行  (By @barrymchen)
+https:\/\/m\.ctrip\.com\/restapi\/soa2\/14946\/json\/userBaseInfo url script-request-header nzw9314/Task/ctrip_cookie.js
+# 小程序 复制到本地
+;^https:\/\/m\.ctrip\.com\/restapi\/soa2\/16575\/getUserInfo url script-request-body nzw9314/Task/ct_cookie.js
+
+# 京东到家 (By @barrymchen, @GideonSenku & @Macsuny)
+https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin url script-request-header nzw9314/Task/jddj.js
+
+# 微信小程序-来客有礼 (By @Macsuny)
+https:\/\/draw\.jdfcloud\.com\/\/api\/turncard\/sign\? url script-request-header nzw9314/Task/lkyl.js
+
+# 微信小程序-活动抽奖 (By @makexp & @zZPiglet)
+^https:\/\/api-hdcj\.9w9\.com\/v\d\/sign url script-request-header nzw9314/Task/WeChatLottery_new.js
