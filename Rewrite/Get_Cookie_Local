@@ -1,19 +1,94 @@
-hostname = h5.ele.me, m.ctrip.com, daojia.jd.com, draw.jdfcloud.com, api-hdcj.9w9.com
-# > 大雄脚本组，签到获取cookie
+hostname = h5.ele.me, m.ctrip.com, daojia.jd.com, draw.jdfcloud.com, api-hdcj.9w9.com, c.tieba.baidu.com, api.m.jd.com, *.bilibili.com, sf-integral-sign-in.weixinjia.net, mcs-mimp-web.sf-express.com, *.video.qq.com, 110.43.90.61, zt.wps.cn, act.10010.com, m.client.10010.com, gameapi.hellobike.com, api.1sapp.com
+# > 大雄----------------------------
 
 # 饿了么 (By @syzzzf)
+# 打开 APP, 访问下`我的`>`签到领红包`(左上角)
+# hostname = h5.ele.me
 ^https:\/\/h5\.ele\.me\/restapi\/eus\/v\d\/current_user$ url script-request-header nzw9314/Task/elemGetCookies.js
 
 # 携程旅行  (By @barrymchen)
+# 打开App 点击"我的",然后点击"我的积分",再点击下面的"签到.任务"即可
+# hostname = m.ctrip.com
 https:\/\/m\.ctrip\.com\/restapi\/soa2\/14946\/json\/userBaseInfo url script-request-header nzw9314/Task/ctrip_cookie.js
-# 小程序 复制到本地
-;^https:\/\/m\.ctrip\.com\/restapi\/soa2\/16575\/getUserInfo url script-request-body nzw9314/Task/ct_cookie.js
+# 携程小程序(登录携程微信小程序，我的特权)
+^https:\/\/m\.ctrip\.com\/restapi\/soa2\/16575\/getUserInfo url script-request-body nzw9314/Task/ct_cookie.js
 
 # 京东到家 (By @barrymchen, @GideonSenku & @Macsuny)
+# APP登陆账号后，点击主页'签到',即可
+# hostname = daojia.jd.com
 https:\/\/daojia\.jd\.com\/client\?_jdrandom=\d{13}&functionId=%2Fsignin url script-request-header nzw9314/Task/jddj.js
 
 # 微信小程序-来客有礼 (By @Macsuny)
+# 微信搜索'来客有礼'小程序,登陆京东账号，点击'领京豆->翻牌'
+# hostname = draw.jdfcloud.com
 https:\/\/draw\.jdfcloud\.com\/\/api\/turncard\/sign\? url script-request-header nzw9314/Task/lkyl.js
 
 # 微信小程序-活动抽奖 (By @makexp & @zZPiglet)
+# 打开微信小程序 进入"活动抽奖"，手动签到一次或点击"已签到"
+# hostname = api-hdcj.9w9.com
 ^https:\/\/api-hdcj\.9w9\.com\/v\d\/sign url script-request-header nzw9314/Task/WeChatLottery_new.js
+
+
+# > NobyDa----------------------------
+
+# 贴吧
+# 打开App,访问下右下角 `我的
+# hostname = c.tieba.baidu.com
+https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login url script-request-header NobyDa/QuantumultX/TieBa-DailyBonus/TieBa_GetCookie_QX.js
+
+# hostname = api.m.jd.com
+# 京东
+# 浏览器登录 https://bean.m.jd.com 点击签到并且出现签到日历
+https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean url script-request-header NobyDa/JD-DailyBonus/JD_DailyBonus.js
+
+
+# > chavyleung----------------------------
+
+# bilibili
+# 先登录，打开浏览器访问: https://www.bilibili.com 或 https://live.bilibili.com，系统提示: 获取Cookie: 成功
+# hostname = *.bilibili.com
+^https:\/\/(www|live)\.bilibili\.com\/?.? url script-request-header chavyleung/bilibili/bilibili.cookie.js
+
+# 顺丰速运
+# 打开 APP, 访问下我的顺丰 > 去签到 (访问下去签到的页面即可, 不用点签到), 系统提示: 获取Cookie: 成功
+# 打开 APP, 访问下27周年庆, 系统提示: 获取Cookie: 成功 (27周年)
+# hostname = sf-integral-sign-in.weixinjia.net, mcs-mimp-web.sf-express.com
+^https:\/\/sf-integral-sign-in.weixinjia.net\/app\/index url script-request-header chavyleung/sfexpress/sfexpress.cookie.js
+^https:\/\/mcs-mimp-web.sf-express.com\/mcs-mimp\/share\/(.*?)Redirect url script-request-header chavyleung/sfexpress/sfexpress.cookie.js
+
+# 腾讯视频
+# 手机浏览器访问下: https://film.qq.com/ 随便选 1 部电影观看
+# 手机浏览器访问下: http://v.qq.com/x/bu/mobile_checkin 页面提示提示签到成功, 系统提示: 获取Cookie: 成功 （为保成功率，请刷新一下页面再获取一次）
+# hostname = *.video.qq.com
+^https:\/\/access.video.qq.com\/user\/auth_refresh url script-request-header chavyleung/videoqq/videoqq.cookie.js
+
+# WPS
+# 打开 APP , 进入签到页面, 系统提示: 获取Cookie: 成功 (APP) (不用手动签到)
+# 打开 我的WPS会员 小程序 , 进入签到页面并手动签到, 系统提示: 获取Cookie: 成功 (小程序) (手动签到)
+# hostname = 110.43.90.61, zt.wps.cn
+^https:\/\/zt.wps.cn\/2018\/docer_check_in\/api\/act_list url script-request-header chavyleung/wps/wps.cookie.js
+^https:\/\/zt.wps.cn\/2018\/clock_in\/api\/sign_up url script-request-header chavyleung/wps/wps.cookie.js
+
+# 中国联通
+# 打开 APP , 进入签到页面, 系统提示: 获取刷新链接: 成功
+# 然后手动签到 1 次, 系统提示: 获取Cookie: 成功 (每日签到)
+# 首页>天天抽奖, 系统提示 2 次: 获取Cookie: 成功 (登录抽奖) 和 获取Cookie: 成功 (抽奖次数)
+# hostname = act.10010.com, m.client.10010.com
+^https:\/\/act.10010.com\/SigninApp\/signin\/querySigninActivity.htm url script-request-header chavyleung/10010/10010.cookie.js
+^https:\/\/act.10010.com\/SigninApp(.*?)\/signin\/daySign.do url script-request-header chavyleung/10010/10010.cookie.js
+^https:\/\/m.client.10010.com\/dailylottery\/static\/(textdl\/userLogin|active\/findActivityInfo) url script-request-header chavyleung/10010/10010.cookie.js
+
+# 哈啰出行
+# 打开 APP 进入签到页面: 我的 > 有哈有车
+# hostname = gameapi.hellobike.com
+^https:\/\/gameapi\.hellobike\.com\/api url script-request-body chavyleung/hellobike/hellobike.js
+
+# 趣头条
+# 打开 APP 进入签到: 右上角 > 签到
+# 系统提示: 获取Cookie: 成功
+# 阅读篇数获取Cookie:小视频中播放一段时间视频即可获取,具体的阅读篇数奖励请到应用内手动点击
+# 首页金币奖励:此Cookie在首页的推荐中随机出现,随机获取,并不一定会出现
+# hostname = api.1sapp.com
+^https:\/\/api\.1sapp\.com\/sign\/info? url script-request-header chavyleung/qtt/qtt.cookie.js
+^https:\/\/api\.1sapp\.com\/content\/readV2? url script-request-header chavyleung/qtt/qtt.cookie.js
+^https:\/\/api\.1sapp\.com\/x\/feed\/getReward? url script-request-header chavyleung/qtt/qtt.cookie.js
